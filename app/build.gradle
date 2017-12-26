@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -11,23 +12,47 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // Enable VectorDrawableCompat for API < 21
+        vectorDrawables.useSupportLibrary = true
     }
+
+    sourceSets {
+        // Main source set is Kotlin!
+        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
         release {
+            applicationIdSuffix '.release'
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     dataBinding {
         enabled = true
+    }
+
+    lintOptions {
+        warningsAsErrors false
+        abortOnError true // Fail early.
+
+        lintConfig file("lint.xml")
     }
 }
 
 dependencies {
 
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     ext {
         //App Dependencies
         appCompatVersion = '27.0.2'
+        dataBindingVersion = '3.1.0-alpha06'
         rx2FastAndroidNetworking = '1.0.1'
         roomDatabase = '1.0.0'
         debugDBVersion = '1.0.0'
@@ -48,46 +73,62 @@ dependencies {
     }
 
     //Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
     //Support Library
     implementation "com.android.support:appcompat-v7:$appCompatVersion"
     implementation "com.android.support:animated-vector-drawable:$appCompatVersion"
     implementation "com.android.support:recyclerview-v7:$appCompatVersion"
     implementation "com.android.support:cardview-v7:$appCompatVersion"
     implementation "com.android.support:design:$appCompatVersion"
+
+    //DataBinding
+    kapt "com.android.databinding:compiler:$dataBindingVersion"
+
     //Networking
     implementation "com.amitshekhar.android:rx2-android-networking:$rx2FastAndroidNetworking"
+
     //Database
     implementation "android.arch.persistence.room:rxjava2:$roomDatabase"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomDatabase"
+    kapt "android.arch.persistence.room:compiler:$roomDatabase"
+
     //Debug Database
     debugImplementation "com.amitshekhar.android:debug-db:$debugDBVersion"
+
     //Viewmodel
     implementation "android.arch.lifecycle:extensions:$viewModelVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$viewModelVersion"
+    kapt "android.arch.lifecycle:compiler:$viewModelVersion"
+
     //Loading Images
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+
     //GSON
     implementation "com.google.code.gson:gson:$gsonVersion"
+
     //Dagger2
     implementation "com.google.dagger:dagger:$dagger2Version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
     implementation "com.google.dagger:dagger-android-support:$dagger2Version"
+
     //RxJava2
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
     //Logger
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
     //PlaceHolderView
     implementation "com.mindorks:placeholderview:$placeHolderViewVersion"
+
     //Unit Testing
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
+
     //UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
-    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
 }
