@@ -2,7 +2,7 @@ package com.omarmohameddev.teleshows.data.source
 
 import com.omarmohameddev.teleshows.data.repository.TeleshowsDataStore
 import com.omarmohameddev.teleshows.data.repository.TeleshowsRemote
-import com.omarmohameddev.teleshows.domain.model.Teleshow
+import com.omarmohameddev.teleshows.model.Teleshow
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single

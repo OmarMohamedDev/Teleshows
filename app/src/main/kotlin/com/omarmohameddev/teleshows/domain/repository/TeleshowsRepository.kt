@@ -1,6 +1,6 @@
 package com.omarmohameddev.teleshows.domain.repository
 
-import com.omarmohameddev.teleshows.domain.model.Teleshow
+import com.omarmohameddev.teleshows.model.Teleshow
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

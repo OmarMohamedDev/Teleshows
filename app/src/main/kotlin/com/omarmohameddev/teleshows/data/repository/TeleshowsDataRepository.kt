@@ -2,7 +2,7 @@ package com.omarmohameddev.teleshows.data.repository
 
 import android.annotation.SuppressLint
 import com.omarmohameddev.teleshows.data.source.TeleshowsDataStoreFactory
-import com.omarmohameddev.teleshows.domain.model.Teleshow
+import com.omarmohameddev.teleshows.model.Teleshow
 import com.omarmohameddev.teleshows.domain.repository.TeleshowsRepository
 import io.reactivex.Completable
 import io.reactivex.Flowable
