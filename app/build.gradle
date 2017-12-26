@@ -54,9 +54,8 @@ dependencies {
         appCompatVersion = '27.0.2'
         dataBindingVersion = '3.1.0-alpha06'
         rx2FastAndroidNetworking = '1.0.1'
-        roomDatabase = '1.0.0'
+        archComponentsVersion = '1.0.0'
         debugDBVersion = '1.0.0'
-        viewModelVersion = '1.0.0'
         glideVersion = '3.7.0'
         gsonVersion = '2.8.0'
         dagger2Version = '2.12'
@@ -84,20 +83,20 @@ dependencies {
 
     //DataBinding
     kapt "com.android.databinding:compiler:$dataBindingVersion"
-
+3
     //Networking
     implementation "com.amitshekhar.android:rx2-android-networking:$rx2FastAndroidNetworking"
 
     //Database
-    implementation "android.arch.persistence.room:rxjava2:$roomDatabase"
-    kapt "android.arch.persistence.room:compiler:$roomDatabase"
+    implementation "android.arch.persistence.room:rxjava2:$archComponentsVersion"
+    kapt "android.arch.persistence.room:compiler:$archComponentsVersion"
+
+    //Viewmodel
+    implementation "android.arch.lifecycle:extensions:$archComponentsVersion"
+    kapt "android.arch.lifecycle:compiler:$archComponentsVersion"
 
     //Debug Database
     debugImplementation "com.amitshekhar.android:debug-db:$debugDBVersion"
-
-    //Viewmodel
-    implementation "android.arch.lifecycle:extensions:$viewModelVersion"
-    kapt "android.arch.lifecycle:compiler:$viewModelVersion"
 
     //Loading Images
     implementation "com.github.bumptech.glide:glide:$glideVersion"
