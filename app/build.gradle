@@ -53,7 +53,7 @@ dependencies {
         //App Dependencies
         appCompatVersion = '27.0.2'
         dataBindingVersion = '3.1.0-alpha06'
-        rx2FastAndroidNetworking = '1.0.1'
+        retrofitVersion = '2.3.0'
         archComponentsVersion = '1.0.0'
         debugDBVersion = '1.0.0'
         glideVersion = '3.7.0'
@@ -85,7 +85,7 @@ dependencies {
     kapt "com.android.databinding:compiler:$dataBindingVersion"
 3
     //Networking
-    implementation "com.amitshekhar.android:rx2-android-networking:$rx2FastAndroidNetworking"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
     //Database
     implementation "android.arch.persistence.room:rxjava2:$archComponentsVersion"
