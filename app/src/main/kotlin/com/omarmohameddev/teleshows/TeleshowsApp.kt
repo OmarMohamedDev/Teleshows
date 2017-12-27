@@ -3,6 +3,7 @@ package com.omarmohameddev.teleshows
 import android.app.Activity
 import android.app.Application
 import com.omarmohameddev.teleshows.di.component.DaggerAppComponent
+import com.omarmohameddev.teleshows.di.module.AppModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

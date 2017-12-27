@@ -9,7 +9,7 @@ import retrofit2.http.GET
  */
 interface TeleshowsService {
 
-    @GET("/movie/top_rated")
+    @GET("movie/top_rated")
     fun getTeleshows(): Flowable<TeleshowsResponse>
 
     class TeleshowsResponse {
