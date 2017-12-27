@@ -10,7 +10,7 @@ import com.omarmohameddev.teleshows.model.Teleshow
 @Database(entities = arrayOf(Teleshow::class), version = 1)
 abstract class TeleshowsDatabase : RoomDatabase() {
 
-    abstract fun teleshowDao(): TeleshowDao
+    abstract fun cachedTeleshowDao(): TeleshowDao
 
     private var INSTANCE: TeleshowsDatabase? = null
 
