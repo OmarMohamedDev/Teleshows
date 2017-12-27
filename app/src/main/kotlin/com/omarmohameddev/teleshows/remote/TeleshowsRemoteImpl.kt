@@ -14,7 +14,7 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
         TeleshowsRemote {
 
     /**
-     * Retrieve a list of [BufferooEntity] instances from the [BufferooService].
+     * Retrieve a list of [TeleshowsEntity] instances from the [TeleshowsService].
      */
     override fun getTeleshows(): Flowable<List<Teleshow>> {
         return teleshowsService.getTeleshows()
