@@ -1,36 +1,35 @@
 package com.omarmohameddev.teleshows
 
+import android.app.Activity
 import android.app.Application
-import com.omarmohameddev.teleshows.di.component.AppComponent
 import com.omarmohameddev.teleshows.di.component.DaggerAppComponent
-import com.omarmohameddev.teleshows.di.module.AppModule
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
-import dagger.Lazy
 import javax.inject.Inject
 
-class TeleshowsApp : Application() {
+class TeleshowsApp : Application(), HasActivityInjector {
 
-    @Inject
-    lateinit var debugTree: Lazy<Timber.DebugTree>
-
-    companion object {
-        lateinit var graph: AppComponent
-    }
+    @Inject lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this)
+        setupTimber()
+    }
 
-        initDependencyGraph()
-
+    private fun setupTimber() {
         if (BuildConfig.DEBUG) {
-            Timber.plant(debugTree.get())
+            Timber.plant(Timber.DebugTree())
         }
     }
 
-    private fun initDependencyGraph() {
-        graph = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
-        graph.injectTo(this)
+    override fun activityInjector(): AndroidInjector<Activity> {
+        return activityDispatchingAndroidInjector
     }
 }

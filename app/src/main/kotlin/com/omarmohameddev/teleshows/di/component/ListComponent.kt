@@ -4,12 +4,14 @@ import com.omarmohameddev.teleshows.di.module.ListModule
 import com.omarmohameddev.teleshows.di.scope.ActivityScope
 import com.omarmohameddev.teleshows.ui.list.ListActivity
 import dagger.Subcomponent
+import dagger.android.AndroidInjector
 
 @ActivityScope
 @Subcomponent(modules = arrayOf(
         ListModule::class
 ))
-interface ListComponent {
+interface ListComponent :AndroidInjector<ListActivity>{
 
-    fun injectTo(activity: ListActivity)
+    @Subcomponent.Builder
+    abstract class Builder : AndroidInjector.Builder<ListActivity>()
 }

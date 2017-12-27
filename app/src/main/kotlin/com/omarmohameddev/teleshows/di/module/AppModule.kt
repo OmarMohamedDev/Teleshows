@@ -32,7 +32,7 @@ import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val app: TeleshowsApp) {
+open class AppModule {
 
     @Provides
     @ApplicationScope
