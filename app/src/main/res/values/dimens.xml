@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_poster_size">80dp</dimen>
+    <dimen name="list_item_poster_padding">12dp</dimen>
+    <dimen name="list_item_title_size">20sp</dimen>
+    <dimen name="list_item_title_margin_start">12dp</dimen>
+    <dimen name="list_item_title_margin_top">16dp</dimen>
+    <dimen name="list_item_vote_average_size">18sp</dimen>
+    <dimen name="list_try_again_button_padding">16dp</dimen>
+</resources>
