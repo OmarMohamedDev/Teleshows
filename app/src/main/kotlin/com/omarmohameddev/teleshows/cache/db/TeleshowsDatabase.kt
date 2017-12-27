@@ -6,10 +6,9 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.omarmohameddev.teleshows.cache.dao.TeleshowDao
 import com.omarmohameddev.teleshows.model.Teleshow
-import javax.inject.Inject
 
 @Database(entities = arrayOf(Teleshow::class), version = 1)
-abstract class TeleshowsDatabase @Inject constructor() : RoomDatabase() {
+abstract class TeleshowsDatabase : RoomDatabase() {
 
     abstract fun teleshowDao(): TeleshowDao
 
