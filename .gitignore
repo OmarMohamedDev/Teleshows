@@ -51,4 +51,4 @@ freeline/
 freeline_project_description.json
 
 # Api Key file
-apikeys.properties
+/apikeys.properties
