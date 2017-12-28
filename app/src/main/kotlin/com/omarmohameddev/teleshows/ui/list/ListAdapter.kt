@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.omarmohameddev.teleshows.R
 import com.omarmohameddev.teleshows.model.Teleshow
+import com.omarmohameddev.teleshows.remote.ApiConstants
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -22,8 +23,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ViewHo
         holder.voteAverage.text = teleshow.voteAverage.toString()
 
         Glide.with(holder.itemView.context)
-                .load(teleshow.posterPath)
-                .apply(RequestOptions.circleCropTransform())
+                .load(ApiConstants.BASE_URL_IMAGES+teleshow.posterPath)
                 .into(holder.poster)
     }
 

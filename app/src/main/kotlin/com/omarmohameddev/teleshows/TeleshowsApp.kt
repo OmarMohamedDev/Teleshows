@@ -9,6 +9,9 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
+import com.akaita.java.rxjava2debug.RxJava2Debug
+
+
 
 class TeleshowsApp : Application(), HasActivityInjector {
 
@@ -22,12 +25,21 @@ class TeleshowsApp : Application(), HasActivityInjector {
                 .build()
                 .inject(this)
         setupTimber()
+        setupRxJava2Debug()
     }
 
     private fun setupTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+    }
+
+    private fun setupRxJava2Debug() {
+        // Enable RxJava assembly stack collection, to make RxJava crash reports clear and unique
+        // Make sure this is called AFTER setting up any Crash reporting mechanism as Crashlytics
+        RxJava2Debug
+                .enableRxJava2AssemblyTracking(
+                        arrayOf("com.omarmohameddev.teleshows"))
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {

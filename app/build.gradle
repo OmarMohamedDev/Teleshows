@@ -59,6 +59,7 @@ dependencies {
         gsonVersion = '2.8.0'
         dagger2Version = '2.12'
         rxJava2Version = '2.0.6'
+        rxJava2DebugVersion = '1.2.2'
         rxAndroidVersion = '2.0.1'
         rxKotlinVersion = '2.2.0'
         timberVersion = '4.5.1'
@@ -117,6 +118,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "com.akaita.java:rxjava2-debug:$rxJava2DebugVersion"
 
     //Logger
     implementation "com.jakewharton.timber:timber:$timberVersion"

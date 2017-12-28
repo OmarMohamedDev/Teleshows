@@ -4,6 +4,9 @@ object ApiConstants {
     //Base url for the movie DB (Version 3)
     const val BASE_URL_V3 = "https://api.themoviedb.org/3/"
 
+    //Base url to retrieve the poster path
+    const val BASE_URL_IMAGES = "https://image.tmdb.org/t/p/w500"
+
     //REST call timeout
     const val CONNECTION_TIMEOUT: Long = 120
 

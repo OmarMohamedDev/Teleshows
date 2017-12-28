@@ -67,7 +67,9 @@ class TeleshowsCacheImpl @Inject constructor(val teleshowsDatabase: TeleshowsDat
      * Checked whether there are instances of [Teleshow] stored in the cache
      */
     override fun isCached(): Single<Boolean> {
-        return Single.just(teleshowsDatabase.cachedTeleshowDao().getTeleshows().isNotEmpty())
+        return Single.defer {
+            Single.just(teleshowsDatabase.cachedTeleshowDao().getTeleshows().isNotEmpty())
+        }
     }
 
     /**

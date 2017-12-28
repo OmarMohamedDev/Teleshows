@@ -1,11 +1,13 @@
 package com.omarmohameddev.teleshows.data.repository
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.omarmohameddev.teleshows.data.source.TeleshowsDataStoreFactory
 import com.omarmohameddev.teleshows.model.Teleshow
 import com.omarmohameddev.teleshows.domain.repository.TeleshowsRepository
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -15,6 +17,8 @@ import javax.inject.Inject
 class TeleshowsDataRepository @Inject constructor(private val factory: TeleshowsDataStoreFactory):
         TeleshowsRepository {
 
+    private val TAG = TeleshowsDataRepository::class.java.simpleName
+
     override fun clearTeleshows(): Completable {
         return factory.retrieveCacheDataStore().clearTeleshows()
     }
@@ -23,15 +27,14 @@ class TeleshowsDataRepository @Inject constructor(private val factory: Teleshows
         return factory.retrieveCacheDataStore().saveTeleshows(teleshows)
     }
 
-    @SuppressLint("CheckResult")
     override fun getTeleshows(): Flowable<List<Teleshow>> {
         return factory.retrieveCacheDataStore().isCached()
-                .flatMapPublisher {
-                    factory.retrieveDataStore(it).getTeleshows()
-                }
-                .flatMap {
-                    saveTeleshows(it).toSingle { it }.toFlowable()
-                }
+                    .flatMapPublisher {
+                            factory.retrieveDataStore(it).getTeleshows()
+                        }.doOnError { t: Throwable? -> Timber.e(TAG, t?.message) }
+                    .flatMap {
+                            saveTeleshows(it).toSingle { it }.toFlowable()
+                        }
     }
 
 }

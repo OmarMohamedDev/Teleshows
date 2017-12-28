@@ -17,7 +17,12 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
      * Retrieve a list of [TeleshowsEntity] instances from the [TeleshowsService].
      */
     override fun getTeleshows(): Flowable<List<Teleshow>> {
-        return teleshowsService.getTeleshows()
+        return teleshowsService.getTeleshows(
+                "aed4610f733bbcee200e6185cb81a7f0",
+                1,
+                "en-US",
+                "us"
+        )
                 .map { it.teleshows }
     }
 
