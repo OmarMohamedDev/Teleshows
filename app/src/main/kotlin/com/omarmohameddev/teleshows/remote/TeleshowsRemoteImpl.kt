@@ -6,6 +6,7 @@ import com.omarmohameddev.teleshows.cache.PreferencesHelper
 import com.omarmohameddev.teleshows.data.repository.TeleshowsRemote
 import com.omarmohameddev.teleshows.model.Teleshow
 import io.reactivex.Flowable
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -26,8 +27,7 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
                 getPage(),
                 getLanguage(),
                 getRegion()
-        )
-                .map { it.teleshows }
+        ).map { it.teleshows }
     }
 
     override fun getApiKey(): String {
@@ -40,11 +40,11 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
     }
 
     override fun getLanguage(): String {
-        return "en-US"
+        return Locale.getDefault().displayLanguage
     }
 
     override fun getRegion(): String {
-        return "us"
+        return Locale.getDefault().displayCountry
     }
 
 }
