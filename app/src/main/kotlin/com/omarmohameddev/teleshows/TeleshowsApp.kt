@@ -3,14 +3,11 @@ package com.omarmohameddev.teleshows
 import android.app.Activity
 import android.app.Application
 import com.omarmohameddev.teleshows.di.component.DaggerAppComponent
-import com.omarmohameddev.teleshows.di.module.AppModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
-import com.akaita.java.rxjava2debug.RxJava2Debug
-
 
 
 class TeleshowsApp : Application(), HasActivityInjector {
