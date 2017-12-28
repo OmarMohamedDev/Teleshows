@@ -25,7 +25,7 @@ open class TeleshowsRemoteDataStore @Inject constructor(private val teleshowsRem
     }
 
     /**
-     * Retrieve a list of [TeleshowEntity] instances from the API
+     * Retrieve a list of [Teleshow] instances from the API
      */
     override fun getTeleshows(): Flowable<List<Teleshow>> {
         return teleshowsRemote.getTeleshows()

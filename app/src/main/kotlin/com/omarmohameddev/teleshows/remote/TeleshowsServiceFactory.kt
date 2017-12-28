@@ -24,7 +24,7 @@ object TeleshowsServiceFactory {
 
     private fun makeTeleshowsService(okHttpClient: OkHttpClient, gson: Gson): TeleshowsService {
         val retrofit = Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
+                .baseUrl(ApiConstants.BASE_URL_V3)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
