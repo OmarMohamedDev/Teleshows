@@ -26,6 +26,7 @@ class TeleshowsApp : Application(), HasActivityInjector {
                 .inject(this)
         setupTimber()
         setupRxJava2Debug()
+
     }
 
     private fun setupTimber() {

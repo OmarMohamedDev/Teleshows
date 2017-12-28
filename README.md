@@ -7,8 +7,8 @@ To get started and make the app running, first of all create an account on https
 Then, follow the instructions explained in the following page in order to create your own API Key to have 
 access to The Movie DB APIs: https://developers.themoviedb.org/3/getting-started/introduction
 
-Finally, just clone this project and create in the root Teleshows folder 
-the following file:
+Finally, just clone this project and create in the Teleshows project folder called "main" 
+a folder called "assets" (if not present yet) and put inside the following file:
 
 ```
 apikeys.properties
@@ -17,7 +17,7 @@ apikeys.properties
 Inside, just add this line replacing {YOUR_API_KEY} with the one obtained in your account:
 
 ```
-movie_db_api_key= {YOUR_API_KEY}
+moviedb_apikey= {YOUR_API_KEY}
 ```
 
 ## Application structure inspired by

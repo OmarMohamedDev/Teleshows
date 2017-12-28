@@ -62,8 +62,8 @@ open class AppModule {
 
     @Provides
     @ApplicationScope
-    internal fun provideTeleshowsRemote(service: TeleshowsService): TeleshowsRemote {
-        return TeleshowsRemoteImpl(service)
+    internal fun provideTeleshowsRemote(service: TeleshowsService, context: Context): TeleshowsRemote {
+        return TeleshowsRemoteImpl(service, context)
     }
 
     @Provides
