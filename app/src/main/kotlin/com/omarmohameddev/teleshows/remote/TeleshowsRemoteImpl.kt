@@ -1,6 +1,5 @@
 package com.omarmohameddev.teleshows.remote
 
-import android.app.Application
 import android.content.Context
 import com.omarmohameddev.teleshows.cache.PreferencesHelper
 import com.omarmohameddev.teleshows.data.repository.TeleshowsRemote
@@ -19,12 +18,19 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
         TeleshowsRemote {
 
     /**
+     * Current page
+     */
+    private var page = 1
+
+    /**
      * Retrieve a list of [Teleshows] instances from the [TeleshowsService].
      */
-    override fun getTeleshows(): Flowable<List<Teleshow>> {
+    override fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>> {
+        if (loadMore) page++
+
         return teleshowsService.getTeleshows(
                 getApiKey(),
-                getPage(),
+                page,
                 getLanguage(),
                 getRegion()
         ).map { it.teleshows }
@@ -33,10 +39,6 @@ class TeleshowsRemoteImpl @Inject constructor(private val teleshowsService: Tele
     override fun getApiKey(): String {
         return PreferencesHelper(context)
                 .moviedbApiKey
-    }
-
-    override fun getPage(): Int {
-        return 1
     }
 
     override fun getLanguage(): String {

@@ -27,10 +27,10 @@ class TeleshowsDataRepository @Inject constructor(private val factory: Teleshows
         return factory.retrieveCacheDataStore().saveTeleshows(teleshows)
     }
 
-    override fun getTeleshows(): Flowable<List<Teleshow>> {
+    override fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>> {
         return factory.retrieveCacheDataStore().isCached()
                     .flatMapPublisher {
-                            factory.retrieveDataStore(it).getTeleshows()
+                            factory.retrieveDataStore(false).getTeleshows(true)
                         }.doOnError { t: Throwable? -> Timber.e(TAG, t?.message) }
                     .flatMap {
                             saveTeleshows(it).toSingle { it }.toFlowable()

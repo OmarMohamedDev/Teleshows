@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.omarmohameddev.teleshows.R
 import com.omarmohameddev.teleshows.model.Teleshow
@@ -14,6 +15,8 @@ import com.omarmohameddev.teleshows.ui.widget.empty.EmptyListener
 import com.omarmohameddev.teleshows.ui.widget.error.ErrorListener
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_list.*
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class ListActivity: AppCompatActivity() {
@@ -69,7 +72,7 @@ class ListActivity: AppCompatActivity() {
     }
 
     private fun updateListView(teleshows: List<Teleshow>) {
-        listAdapter.teleshows = teleshows
+        listAdapter.teleshows.addAll(teleshows)
         listAdapter.notifyDataSetChanged()
     }
 
@@ -83,18 +86,41 @@ class ListActivity: AppCompatActivity() {
     private fun setupViewListeners() {
         list_empty_view.emptyListener = emptyListener
         list_error_view.errorListener = errorListener
+        list_recyclerview.addOnScrollListener(scrollListener)
     }
 
     private val emptyListener = object : EmptyListener {
         override fun onCheckAgainClicked() {
-            listTeleshowsViewModel.fetchTeleshows()
+            listTeleshowsViewModel.fetchTeleshows(false)
         }
     }
 
     private val errorListener = object : ErrorListener {
         override fun onTryAgainClicked() {
-            listTeleshowsViewModel.fetchTeleshows()
+            listTeleshowsViewModel.fetchTeleshows(false)
         }
     }
 
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            var loadMore = true
+
+            if (dy > 0) { //Check for scrolldown
+                val visibleItemCount = list_recyclerview.layoutManager.childCount
+                val totalItemCount = list_recyclerview.layoutManager.itemCount
+                val pastVisibleItems = (list_recyclerview.layoutManager as LinearLayoutManager)
+                        .findFirstVisibleItemPosition()
+
+                if (loadMore) {
+                    if ((visibleItemCount + pastVisibleItems) >=  totalItemCount) {
+                        loadMore = false
+                        Timber.e("Last Item reached")
+                        listTeleshowsViewModel.fetchTeleshows(true)
+                    }
+                }
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ open class ListTeleshowsViewModel @Inject internal constructor(
             MutableLiveData()
 
     init {
-        fetchTeleshows()
+        fetchTeleshows(false)
     }
 
     override fun onCleared() {
@@ -29,12 +29,12 @@ open class ListTeleshowsViewModel @Inject internal constructor(
         return teleshowsLiveData
     }
 
-    fun fetchTeleshows() {
+    fun fetchTeleshows(loadMore: Boolean) {
         teleshowsLiveData.postValue(Resource(ResourceState.LOADING, null, null))
-        return getTeleshows.execute(TeleshowsSubscriber())
+        return getTeleshows.execute(TeleshowsSubscriber(loadMore))
     }
 
-    inner class TeleshowsSubscriber : DisposableSubscriber<List<Teleshow>>() {
+    inner class TeleshowsSubscriber(loadMore: Boolean) : DisposableSubscriber<List<Teleshow>>() {
 
         override fun onComplete() { }
 

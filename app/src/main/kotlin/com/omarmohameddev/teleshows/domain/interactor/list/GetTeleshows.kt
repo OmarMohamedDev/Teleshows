@@ -14,10 +14,12 @@ import javax.inject.Inject
 open class GetTeleshows @Inject constructor(val teleshowsRepository: TeleshowsRepository,
                                             threadExecutor: ThreadExecutor,
                                             postExecutionThread: PostExecutionThread):
-        FlowableUseCase<List<Teleshow>, Void?>(threadExecutor, postExecutionThread) {
+        FlowableUseCase<List<Teleshow>, Boolean?>(threadExecutor, postExecutionThread) {
 
-    public override fun buildUseCaseObservable(params: Void?): Flowable<List<Teleshow>> {
-        return teleshowsRepository.getTeleshows()
+    public override fun buildUseCaseObservable(params: Boolean?): Flowable<List<Teleshow>> {
+        var loadMore = false
+        if (params != null && params) loadMore = params
+        return teleshowsRepository.getTeleshows(loadMore)
     }
 }
 

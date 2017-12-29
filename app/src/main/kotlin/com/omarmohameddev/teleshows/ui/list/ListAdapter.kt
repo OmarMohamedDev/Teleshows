@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
-    var teleshows: List<Teleshow> = arrayListOf()
+    var teleshows: MutableList<Teleshow> = arrayListOf()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val teleshow = teleshows[position]

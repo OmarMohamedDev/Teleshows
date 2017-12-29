@@ -34,8 +34,9 @@ open class TeleshowsCacheDataStore @Inject constructor(private val teleshowsCach
 
     /**
      * Retrieve a list of [Teleshow] instance from the cache
+     * @loadMore parameter not needed for the caching
      */
-    override fun getTeleshows(): Flowable<List<Teleshow>> {
+    override fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>> {
         return teleshowsCache.getTeleshows()
     }
 

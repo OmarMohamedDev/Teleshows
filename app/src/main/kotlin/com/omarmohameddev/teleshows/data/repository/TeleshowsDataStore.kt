@@ -16,7 +16,7 @@ interface TeleshowsDataStore {
 
     fun saveTeleshows(teleshows: List<Teleshow>): Completable
 
-    fun getTeleshows(): Flowable<List<Teleshow>>
+    fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>>
 
     fun isCached(): Single<Boolean>
 

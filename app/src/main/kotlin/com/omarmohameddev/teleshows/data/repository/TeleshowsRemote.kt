@@ -13,12 +13,10 @@ interface TeleshowsRemote {
     /**
      * Retrieve a list of Teleshows, from the cache
      */
-    fun getTeleshows(): Flowable<List<Teleshow>>
+    fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>>
 
     fun getApiKey(): String
-
-    fun getPage(): Int
-
+    
     fun getLanguage(): String
 
     fun getRegion(): String

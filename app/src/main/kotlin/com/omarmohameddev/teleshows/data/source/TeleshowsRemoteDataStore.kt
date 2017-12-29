@@ -27,8 +27,8 @@ open class TeleshowsRemoteDataStore @Inject constructor(private val teleshowsRem
     /**
      * Retrieve a list of [Teleshow] instances from the API
      */
-    override fun getTeleshows(): Flowable<List<Teleshow>> {
-        return teleshowsRemote.getTeleshows()
+    override fun getTeleshows(loadMore: Boolean): Flowable<List<Teleshow>> {
+        return teleshowsRemote.getTeleshows(loadMore)
     }
 
     override fun isCached(): Single<Boolean> {

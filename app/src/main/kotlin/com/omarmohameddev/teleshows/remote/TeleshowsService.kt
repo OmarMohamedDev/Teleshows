@@ -29,5 +29,4 @@ interface TeleshowsService {
         @SerializedName("results")
         lateinit var teleshows: List<Teleshow>
     }
-
 }
