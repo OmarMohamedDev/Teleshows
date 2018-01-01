@@ -3,6 +3,5 @@
     <string name="list_item_poster_content_description">Teleshow Poster</string>
     <string name="list_label_empty_result">Oops, there are no results to display</string>
     <string name="list_label_error_result">Oops, there was an error fetching the data</string>
-    <string name="list_button_check_again">Check again</string>
     <string name="list_button_try_again">Try again</string>
 </resources>

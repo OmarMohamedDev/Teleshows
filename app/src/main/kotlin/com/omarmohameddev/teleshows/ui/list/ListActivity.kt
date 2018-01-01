@@ -3,6 +3,7 @@ package com.omarmohameddev.teleshows.ui.list
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -23,6 +24,7 @@ class ListActivity: AppCompatActivity() {
 
     @Inject lateinit var listAdapter: ListAdapter
     @Inject lateinit var listTeleshowsViewModel: ListTeleshowsViewModel
+    private val LIST_COLUMNS = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class ListActivity: AppCompatActivity() {
     }
 
     private fun setupListRecyclerView() {
-        list_recyclerview.layoutManager = LinearLayoutManager(this)
+        list_recyclerview.layoutManager = GridLayoutManager(this, LIST_COLUMNS)
         list_recyclerview.adapter = listAdapter
     }
 
@@ -110,7 +112,7 @@ class ListActivity: AppCompatActivity() {
             if (dy > 0) { //Check for scrolldown
                 val visibleItemCount = list_recyclerview.layoutManager.childCount
                 val totalItemCount = list_recyclerview.layoutManager.itemCount
-                val pastVisibleItems = (list_recyclerview.layoutManager as LinearLayoutManager)
+                val pastVisibleItems = (list_recyclerview.layoutManager as GridLayoutManager)
                         .findFirstVisibleItemPosition()
 
                 if (loadMore) {

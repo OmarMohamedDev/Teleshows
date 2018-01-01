@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.omarmohameddev.teleshows.R
 import com.omarmohameddev.teleshows.model.Teleshow
 import com.omarmohameddev.teleshows.remote.ApiConstants
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -24,6 +25,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ViewHo
 
         Glide.with(holder.itemView.context)
                 .load(ApiConstants.BASE_URL_IMAGES+teleshow.posterPath)
+                .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(20,0)))
                 .into(holder.poster)
     }
 
