@@ -33,6 +33,16 @@
             android:layout_below="@id/list_item_title"
             android:contentDescription="@string/list_item_poster_content_description" />
 
+        <ImageView
+            android:id="@+id/list_item_vote_average_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/list_item_vote_average"
+            android:layout_below="@id/list_item_poster"
+            android:layout_margin="@dimen/list_item_vote_average_icon_margin"
+            app:srcCompat="@drawable/ic_star"
+            android:contentDescription="@string/list_item_poster_vote_average_icon_content_description" />
+
         <TextView
             android:id="@+id/list_item_vote_average"
             android:layout_width="wrap_content"
